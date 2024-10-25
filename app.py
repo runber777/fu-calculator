@@ -17,6 +17,6 @@ def calc(user_input):
                 result = current_nums[0] * current_nums[1]
             elif word == "делить на":
                 result = current_nums[0] // current_nums[1]
-    return result
+    return translate_to_word(result)
 
-print(calc("двадцать пять минус пять"))
+print(calc("двадцать пять плюс тридцать шесть"))

@@ -52,5 +52,18 @@ def translate_to_num(word):
     current_nums.append(current_num)
     return current_nums
 
-def translate_to_word(word):
-    return
+def translate_to_word(num):
+    answer = []
+    if 10 <=num<= 19:
+        for key, value in teens.items():
+            if value == num:
+                answer.append(key)
+                return answer
+    if len(str(num)) == 2:
+        for key, value in tens.items():
+            if str(value)[0] == str(num)[0]:
+                answer.append(key)
+        for key, value in digits.items():
+            if str(value)[0] == str(num)[1]:
+                answer.append(key)
+    return " ".join(answer)
