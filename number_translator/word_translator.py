@@ -1,4 +1,4 @@
-number_words_to_digits = {
+digits = {
     "ноль": 0,
     "один": 1,
     "два": 2,
@@ -9,6 +9,9 @@ number_words_to_digits = {
     "семь": 7,
     "восемь": 8,
     "девять": 9,
+}
+
+teens = {
     "десять": 10,
     "одиннадцать": 11,
     "двенадцать": 12,
@@ -19,6 +22,9 @@ number_words_to_digits = {
     "семнадцать": 17,
     "восемнадцать": 18,
     "девятнадцать": 19,
+}
+
+tens = {
     "двадцать": 20,
     "тридцать": 30,
     "сорок": 40,
@@ -27,17 +33,24 @@ number_words_to_digits = {
     "семьдесят": 70,
     "восемьдесят": 80,
     "девяносто": 90,
-    "сто": 100,
-    "двести": 200,
-    "триста": 300,
-    "четыреста": 400,
-    "пятьсот": 500,
-    "шестьсот": 600,
-    "семьсот": 700,
-    "восемьсот": 800,
-    "девятьсот": 900,
-    "тысяча": 1000
 }
 
-def tranlate(word):
-    return number_words_to_digits[word]
+def translate_to_num(word):
+    user_command = word.split()
+    current_nums = []
+    current_num = 0
+    for elem in user_command:
+        if elem in teens:
+            current_num += teens[elem]
+        elif elem in tens:
+            current_num += tens[elem]
+        elif elem in digits:
+            current_num += digits[elem]
+        else:
+            current_nums.append(current_num)
+            current_num = 0
+    current_nums.append(current_num)
+    return current_nums
+
+def translate_to_word(word):
+    return
