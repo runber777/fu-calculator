@@ -45,6 +45,7 @@ commands = {
 }
 
 def translate_to_num(word):
+    """Перевод из слов в символы"""
     user_command = word.split()
     current_nums = []
     current_num = None
@@ -55,9 +56,9 @@ def translate_to_num(word):
             current_num = (current_num or 0) + tens[elem]
         elif elem in digits:
             current_num = (current_num or 0) + digits[elem]
-        elif elem == "на":
+        elif elem == "на": # Игнорируем слово "на"
             continue
-        elif elem == "скобка":
+        elif elem == "скобка": # Игнорируем слово "скобка"
             continue
         else:
             if current_num is not None:
@@ -70,6 +71,7 @@ def translate_to_num(word):
     return current_nums
 
 def translate_to_word(num):
+    """Перевод из символов в слова"""
     answer = []
     if 10 <=num<= 19:
         for key, value in teens.items():

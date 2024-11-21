@@ -5,6 +5,8 @@ from number_translator import *
 
 
 def calc(user_input):
+    """основная функция,
+    вызывает остальные"""
     current_nums = translate_to_num(user_input)
     current_command = ''.join(str(x) for x in current_nums)
     result = eval(current_command)
