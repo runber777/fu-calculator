@@ -35,21 +35,38 @@ tens = {
     "девяносто": 90,
 }
 
+commands = {
+    "плюс": "+",
+    "минус": "-",
+    "умножить": "*",
+    "делить": "/",
+    "закрывается": ")",
+    "открывается": "("
+}
+
 def translate_to_num(word):
     user_command = word.split()
     current_nums = []
-    current_num = 0
+    current_num = None
     for elem in user_command:
         if elem in teens:
-            current_num += teens[elem]
+            current_num = (current_num or 0) + teens[elem]
         elif elem in tens:
-            current_num += tens[elem]
+            current_num = (current_num or 0) + tens[elem]
         elif elem in digits:
-            current_num += digits[elem]
+            current_num = (current_num or 0) + digits[elem]
+        elif elem == "на":
+            continue
+        elif elem == "скобка":
+            continue
         else:
-            current_nums.append(current_num)
-            current_num = 0
-    current_nums.append(current_num)
+            if current_num is not None:
+                current_nums.append(current_num)
+                current_num = None
+            if elem in commands:
+                current_nums.append(commands[elem])
+    if current_num is not None:
+        current_nums.append(current_num)
     return current_nums
 
 def translate_to_word(num):
@@ -58,12 +75,17 @@ def translate_to_word(num):
         for key, value in teens.items():
             if value == num:
                 answer.append(key)
-                return answer
-    if len(str(num)) == 2:
+    elif len(str(num)) == 2:
         for key, value in tens.items():
             if str(value)[0] == str(num)[0]:
                 answer.append(key)
         for key, value in digits.items():
+            if str(value)[0] == "0":
+                continue
             if str(value)[0] == str(num)[1]:
+                answer.append(key)
+    elif len(str(num)) == 1:
+        for key, value in digits.items():
+            if value == num:
                 answer.append(key)
     return " ".join(answer)

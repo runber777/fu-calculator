@@ -2,21 +2,15 @@ import number_translator
 from number_translator import *
 
 
-commands = ["плюс", "минус", "умножить на", "делить на"]
+
 
 def calc(user_input):
     current_nums = translate_to_num(user_input)
-    user_command = user_input.split()
-    for word in user_command:
-        if word in commands:
-            if word == "плюс":
-                result = current_nums[0] + current_nums[1]
-            elif word == "минус":
-                result = current_nums[0] - current_nums[1]
-            elif word == "умножить на":
-                result = current_nums[0] * current_nums[1]
-            elif word == "делить на":
-                result = current_nums[0] // current_nums[1]
+    current_command = ''.join(str(x) for x in current_nums)
+    result = eval(current_command)
     return translate_to_word(result)
 
-print(calc("двадцать пять плюс тридцать шесть"))
+print(calc("двадцать пять плюс тринадцать"))
+print(calc("пять плюс два умножить на три минус один"))
+print(calc("скобка открывается пять плюс два скобка закрывается умножить на три минус один"))
+print(calc("пять минус минус один"))
